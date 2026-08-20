@@ -1,0 +1,21 @@
+{
+    "name": "sql-ai-agent",
+    "version": "1.0.0",
+    "description": "An AI agent that queries and executes queries on a database",
+    "keywords": [
+        "AI",
+        "Agent",
+        "Queries"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/antonioamandio/SQL-AI-Agent.git"
+    },
+    "bugs": {
+        "url": "https://github.com/antonioamandio/SQL-AI-Agent/issues"
+    },
+    "homepage": "https://github.com/antonioamandio/SQL-AI-Agent#readme",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {}
+}
