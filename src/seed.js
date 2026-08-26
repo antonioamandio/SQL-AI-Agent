@@ -17,7 +17,7 @@ if (
 
 const stream = createWriteStream(LOG_FILE)
 
-function generateFakeUser() {
+function generateUser() {
     return {
         ip: faker.internet.ip(),
         username: faker.internet.userName(),
