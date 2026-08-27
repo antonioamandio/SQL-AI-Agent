@@ -21,13 +21,13 @@ function generateUser() {
     return {
         ip: faker.internet.ip(),
         username: faker.internet.userName(),
-        firstName: faker.name.firstName(),
-        lastName: faker.name.lastName(),
+        firstName: faker.person.firstName(),
+        lastName: faker.person.lastName(),
         email: faker.internet.email(),
         location: faker.location.city(),
-        jobArea: faker.name.jobArea(),
+        jobArea: faker.person.jobArea(),
         company: faker.company.name(),
-        jobTitle: faker.name.jobTitle(),
+        jobTitle: faker.person.jobTitle(),
         id: faker.string.uuid(),
     }
 }
@@ -61,6 +61,17 @@ console.log(
 console.log(`Limite de registros: ${maxRecords.toLocaleString()}`)
 
 const users = Array.from({ length: 5 }, generateUser())
+
+process.on('SIGINT', () => {
+    stream.end(() => {
+        const { size } = statSync(LOG_FILE)
+
+        console.log(
+            `Geração interrompida! Registros: ${count.toLocaleString()}, Tamanho do arquivo: ${convertFromBytesToBG(size)} GB`,
+        )
+    })
+})
+
 let count = 0
 
 while (count < maxRecords) {
