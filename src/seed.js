@@ -38,3 +38,14 @@ function generateLogEntry(user) {
         timestamp: faker.date.recent.toString(),
     }
 }
+
+// Backpressure implementation
+function writeRecord(line) {
+    return new Promise((resolve) => {
+        if (!stream.write(line)) {
+            stream.once('drain', resolve)
+        } else {
+            resolve()
+        }
+    })
+}
