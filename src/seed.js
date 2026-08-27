@@ -31,3 +31,10 @@ function generateUser() {
         id: faker.string.uuid(),
     }
 }
+
+function generateLogEntry(user) {
+    return {
+        ...user,
+        timestamp: faker.date.recent.toString(),
+    }
+}
