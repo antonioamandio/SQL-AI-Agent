@@ -49,3 +49,21 @@ function writeRecord(line) {
         }
     })
 }
+
+console.log(
+    `Gerando logs de acesso falsos em ${LOG_FILE}... (Ctrl + C para interromper)`,
+)
+
+console.log(`Limite de registros: ${maxRecords.toLocaleString()}`)
+
+const users = Array.from({ length: 5 }, generateUser())
+let count = 0
+
+while (count < maxRecords) {
+    const user = faker.helpers.arrayElement(users)
+    const record = generateLogEntry(user)
+
+    await writeRecord(JSON.stringify(record) + '\n')
+
+    count++
+}
