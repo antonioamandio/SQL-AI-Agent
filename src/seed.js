@@ -66,4 +66,12 @@ while (count < maxRecords) {
     await writeRecord(JSON.stringify(record) + '\n')
 
     count++
+
+    if (count % LOG_INTERVAL == 0) {
+        const { size } = statSync(LOG_FILE)
+
+        console.log(
+            `Registros: ${count.toLocaleString()}, Tamanho do arquivo: ${(size / 1024 / 1024 / 1024).toFixed(4)} GB`,
+        )
+    }
 }
