@@ -50,6 +50,10 @@ function writeRecord(line) {
     })
 }
 
+function convertFromBytesToBG(bytes) {
+    return (bytes / 1024 / 1024 / 1024).toFixed(4)
+}
+
 console.log(
     `Gerando logs de acesso falsos em ${LOG_FILE}... (Ctrl + C para interromper)`,
 )
@@ -71,7 +75,15 @@ while (count < maxRecords) {
         const { size } = statSync(LOG_FILE)
 
         console.log(
-            `Registros: ${count.toLocaleString()}, Tamanho do arquivo: ${(size / 1024 / 1024 / 1024).toFixed(4)} GB`,
+            `Registros: ${count.toLocaleString()}, Tamanho do arquivo: ${convertFromBytesToBG(size)} GB`,
         )
     }
 }
+
+stream.end(() => {
+    const { size } = statSync(LOG_FILE)
+
+    console.log(
+        `Geração concluída! Registros: ${count.toLocaleString()}, Tamanho do arquivo: ${convertFromBytesToBG(size)} GB`,
+    )
+})
