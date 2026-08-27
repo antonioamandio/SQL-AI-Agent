@@ -60,7 +60,7 @@ console.log(
 
 console.log(`Limite de registros: ${maxRecords.toLocaleString()}`)
 
-const users = Array.from({ length: 5 }, generateUser())
+const users = Array.from({ length: 5 }, generateUser)
 
 process.on('SIGINT', () => {
     stream.end(() => {
