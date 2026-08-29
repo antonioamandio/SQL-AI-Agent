@@ -55,10 +55,10 @@ function convertFromBytesToBG(bytes) {
 }
 
 console.log(
-    `Gerando logs de acesso falsos em ${LOG_FILE}... (Ctrl + C para interromper)`,
+    `Generating fake access logs in ${LOG_FILE}... (Press Ctrl + C to stop)`,
 )
 
-console.log(`Limite de registros: ${maxRecords.toLocaleString()}`)
+console.log(`Record limit: ${maxRecords.toLocaleString()}`)
 
 const users = Array.from({ length: 5 }, generateUser)
 
@@ -67,7 +67,7 @@ process.on('SIGINT', () => {
         const { size } = statSync(LOG_FILE)
 
         console.log(
-            `Geração interrompida! Registros: ${count.toLocaleString()}, Tamanho do arquivo: ${convertFromBytesToBG(size)} GB`,
+            `Generation interrupted! Records: ${count.toLocaleString()}, File size: ${convertFromBytesToBG(size)} GB`,
         )
     })
 })
@@ -86,7 +86,7 @@ while (count < maxRecords) {
         const { size } = statSync(LOG_FILE)
 
         console.log(
-            `Registros: ${count.toLocaleString()}, Tamanho do arquivo: ${convertFromBytesToBG(size)} GB`,
+            `Records: ${count.toLocaleString()}, File size: ${convertFromBytesToBG(size)} GB`,
         )
     }
 }
@@ -95,6 +95,6 @@ stream.end(() => {
     const { size } = statSync(LOG_FILE)
 
     console.log(
-        `Geração concluída! Registros: ${count.toLocaleString()}, Tamanho do arquivo: ${convertFromBytesToBG(size)} GB`,
+        `Generation completed! Records: ${count.toLocaleString()}, File size: ${convertFromBytesToBG(size)} GB`,
     )
 })
