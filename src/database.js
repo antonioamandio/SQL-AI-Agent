@@ -22,4 +22,4 @@ export function createDatabase(path = ':memory:') {
     return database
 }
 
-const db = createDatabase('access_logs.db')
+//const db = createDatabase('access_logs.db')

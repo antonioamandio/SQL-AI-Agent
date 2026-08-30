@@ -18,7 +18,8 @@
     "main": "index.js",
     "type": "module",
     "scripts": {
-        "seed": "node src/seed.js"
+        "seed": "node src/seed.js",
+        "ingest": "node src/ingest.js"
     },
     "dependencies": {
         "@ai-sdk/openai": "1.3.0",

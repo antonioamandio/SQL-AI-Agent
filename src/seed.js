@@ -1,7 +1,7 @@
 import { createWriteStream, statSync } from 'node:fs'
 import { faker } from '@faker-js/faker'
 
-const LOG_FILE = 'access.log'
+export const LOG_FILE = 'access.log'
 const LOG_INTERVAL = 1000
 const maxRecords = Number(process.argv[2] || Infinity)
 
