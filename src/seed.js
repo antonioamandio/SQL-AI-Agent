@@ -1,8 +1,7 @@
 import { createWriteStream, statSync } from 'node:fs'
 import { faker } from '@faker-js/faker'
+import { LOG_FILE, LOG_INTERVAL } from './constants.js'
 
-export const LOG_FILE = 'access.log'
-const LOG_INTERVAL = 1000
 const maxRecords = Number(process.argv[2] || Infinity)
 
 if (
@@ -28,13 +27,13 @@ function generateUser() {
         jobArea: faker.person.jobArea(),
         company: faker.company.name(),
         jobTitle: faker.person.jobTitle(),
-        id: faker.string.uuid(),
     }
 }
 
 function generateLogEntry(user) {
     return {
         ...user,
+        id: faker.string.uuid(),
         timestamp: faker.date.recent.toString(),
     }
 }
@@ -82,7 +81,7 @@ while (count < maxRecords) {
 
     count++
 
-    if (count % LOG_INTERVAL == 0) {
+    if (count % LOG_INTERVAL === 0) {
         const { size } = statSync(LOG_FILE)
 
         console.log(

@@ -16,10 +16,10 @@ export function createDatabase(path = ':memory:') {
 			jobTitle	TEXT NOT NULL,
 			id			TEXT PRIMARY KEY,
 			timestamp	TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-		)
+		);
 	`)
 
     return database
 }
 
-//const db = createDatabase('access_logs.db')
+const db = createDatabase('access_logs.db')
