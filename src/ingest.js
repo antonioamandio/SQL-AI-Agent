@@ -1,7 +1,7 @@
 import { createReadStream } from 'node:fs'
 import { createInterface } from 'node:readline'
-import { LOG_FILE } from './seed'
-import { createDatabase } from './database'
+import { LOG_FILE, LOG_INTERVAL } from './constants.js'
+import { createDatabase } from './database.js'
 
 // Create the database instance used to store the ingested records.
 const database = createDatabase()
@@ -32,4 +32,47 @@ for await (const line of readline) {
         // Skip malformed lines without stopping the process.
         continue
     }
+
+    database
+        .prepare(
+            `
+		INSERT INTO access_logs (
+			ip,
+			username,
+			firstName,
+			lastName,
+			email,
+			location,
+			jobArea,
+			company,
+			jobTitle,
+			id,
+			timestamp
+		) VALUES (
+			?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+		);
+	`,
+        )
+        .run(
+            record.ip,
+            record.username,
+            record.firstName,
+            record.lastName,
+            record.email,
+            record.location,
+            record.jobArea,
+            record.company,
+            record.jobTitle,
+            record.id,
+            record.timestamp,
+        )
+
+    count++
+
+    if (count % LOG_INTERVAL === 0) {
+        console.log(`Ingested ${count} records...`)
+    }
 }
+
+console.log(`Ingestion completed. Total records ingested: ${count}`)
+database.close()
